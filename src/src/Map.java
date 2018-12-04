@@ -8,19 +8,19 @@ import java.util.Scanner;
 
 public class Map {
 	
-	// Õâ¸öÊÇºËĞÄ£¬ÎÒÃÇ¹¹½¨µÄ´óµØÍ¼
+	// è¿™ä¸ªæ˜¯æ ¸å¿ƒï¼Œæˆ‘ä»¬æ„å»ºçš„å¤§åœ°å›¾
 	public ArrayList<Node> M = new ArrayList<Node>();
 	
-	// Í¨¹ıÃû³ÆÑ°ÕÒÕ¾Ì¨ĞòºÅ
+	// é€šè¿‡åç§°å¯»æ‰¾ç«™å°åºå·
 	public HashMap<String, Integer> Name2ID = new HashMap<>();
 	
-	// Õ¾µãÃû³Æ¶Ô¼¸ºÅÏßÊı×éµÄÓ³Éä
+	// ç«™ç‚¹åç§°å¯¹å‡ å·çº¿æ•°ç»„çš„æ˜ å°„
 	public HashMap<String, ArrayList<Integer>> Name2Line = new HashMap<>();
 	
-	// Õ¾µãÃû³Æ¶ÔÕ¾µã±¾ÉíµÄÓ³Éä
+	// ç«™ç‚¹åç§°å¯¹ç«™ç‚¹æœ¬èº«çš„æ˜ å°„
 	public HashMap<String, Node> Name2Node = new HashMap<>();
 	
-	// °ÑËùÓĞÕ¾µãµÄ·ÃÎÊ×´Ì¬ Visted ¶¼±ä³É false£¬×¢ÒâÃ¿´ÎÖ÷º¯Êı×ö×î¶ÌÂ·¾¶Ö®Ç°¶¼Òªµ÷ÓÃÒ»´Î±¾º¯Êı
+	// æŠŠæ‰€æœ‰ç«™ç‚¹çš„è®¿é—®çŠ¶æ€ Visted éƒ½å˜æˆ falseï¼Œæ³¨æ„æ¯æ¬¡ä¸»å‡½æ•°åšæœ€çŸ­è·¯å¾„ä¹‹å‰éƒ½è¦è°ƒç”¨ä¸€æ¬¡æœ¬å‡½æ•°
 	public void setNodeVisted () {
 		for (int i = 0; i < M.size(); i++) {
 			M.get(i).Visited = false;
@@ -29,10 +29,10 @@ public class Map {
 		}
 	}
 	
-	// ÓÃÀ´ÅĞ¶ÏÒ»¸öĞÂµÄÕ¾µãÊÇ·ñÎªĞÂÕ¾µã£¬¼´²»ÔÚ´óµØÍ¼ M ÖĞ
+	// ç”¨æ¥åˆ¤æ–­ä¸€ä¸ªæ–°çš„ç«™ç‚¹æ˜¯å¦ä¸ºæ–°ç«™ç‚¹ï¼Œå³ä¸åœ¨å¤§åœ°å›¾ M ä¸­
 	public boolean isNewNode (Node temp) {	
 		
-		// Ö»ĞèÒªÅĞ¶ÏÃû×ÖÊÇ·ñÏàÍ¬¾ÍºÃÁË
+		// åªéœ€è¦åˆ¤æ–­åå­—æ˜¯å¦ç›¸åŒå°±å¥½äº†
 		for (int i = 0; i < M.size(); i++) {
 			if (M.get(i).Name.equals(temp.Name)) {
 				return false;
@@ -42,36 +42,36 @@ public class Map {
 		return true;		
 	}
 	
-	// Èç¹ûÊÇ¾ÉÕ¾µã£¬Ñ°ÕÒ¸Ã temp Õ¾µãµÄID
+	// å¦‚æœæ˜¯æ—§ç«™ç‚¹ï¼Œå¯»æ‰¾è¯¥ temp ç«™ç‚¹çš„ID
 	public int getID (Node temp) {
 		
-		// ¿¼ÂÇĞÂÕ¾µã£¬µ«Õı³£Çé¿öÏÂÕâ¸öº¯ÊıÓÃ²»ÉÏ
+		// è€ƒè™‘æ–°ç«™ç‚¹ï¼Œä½†æ­£å¸¸æƒ…å†µä¸‹è¿™ä¸ªå‡½æ•°ç”¨ä¸ä¸Š
 		if (isNewNode(temp) == true) {
 			return -1;
 		}
 		
-		// Ñ°ÕÒ¾ÉÕ¾µã
+		// å¯»æ‰¾æ—§ç«™ç‚¹
 		for (int i = 0; i < M.size(); i++) {
 			if (M.get(i).Name.equals(temp.Name)) {
 				return M.get(i).ID;
 			}
 		}
 		
-		// ´¿´âÎªÁË²»Ïë³öÏÖ±¨´íµÄºìÉ«
+		// çº¯ç²¹ä¸ºäº†ä¸æƒ³å‡ºç°æŠ¥é”™çš„çº¢è‰²
 		return -1;
 		
 	}
 	
-	// °ÑÒ»¸öÕ¾µã¼ÓÈëµØÍ¼
+	// æŠŠä¸€ä¸ªç«™ç‚¹åŠ å…¥åœ°å›¾
 	public void addNode (Node temp) {
 		
-		// ĞÂÕ¾µã¸øÒ»¸öĞÂID£¬Ò»°ãÖ±½Ó¸øindex¾ÍĞĞ
+		// æ–°ç«™ç‚¹ç»™ä¸€ä¸ªæ–°IDï¼Œä¸€èˆ¬ç›´æ¥ç»™indexå°±è¡Œ
 		if (isNewNode(temp) == true) {
 			temp.ID =  M.size();
 			M.add(temp);
 		}
 		
-		// ¾ÉÕ¾µãÒªºÏ²¢½øÀ´£¬µ÷ÕûLine£¬Next£¬Distance¶¯Ì¬Êı×é£¬²»ÓÃµ£ĞÄLineÊı×éµÄÖØ¸´
+		// æ—§ç«™ç‚¹è¦åˆå¹¶è¿›æ¥ï¼Œè°ƒæ•´Lineï¼ŒNextï¼ŒDistanceåŠ¨æ€æ•°ç»„ï¼Œä¸ç”¨æ‹…å¿ƒLineæ•°ç»„çš„é‡å¤
 		else {
 			int i = getID(temp);
 			M.get(i).Distance.addAll(temp.Distance);
@@ -81,35 +81,35 @@ public class Map {
 		
 	}
 	
-	// ÎÒÃÇ¿ªÊ¼¶ÁÎÄ¼ş¹¹ÔìµØÍ¼ M
+	// æˆ‘ä»¬å¼€å§‹è¯»æ–‡ä»¶æ„é€ åœ°å›¾ M
 	public void constructNodeMap () throws FileNotFoundException {
 		
-		// ÎÒÃÇÓĞ17¸ötxtÎÄ¼ş
+		// æˆ‘ä»¬æœ‰17ä¸ªtxtæ–‡ä»¶
 		for (int i = 1; i <= 17; i++) {
 			
-			File Temp = new File("Â·ÏßÍ¼\\" + String.valueOf(i) + ".txt");
+			File Temp = new File("map\\" + String.valueOf(i) + ".txt");
 			ArrayList<String> Data = new ArrayList<String>();
 			
 			Scanner input = new Scanner(Temp);
 			input.nextLine();
 			
-			// ¶Á½øÈ¥
+			// è¯»è¿›å»
 			while (input.hasNextLine()) {
 				
 				Data.add(input.nextLine());
 				
 			}
 			
-			// ĞĞÊı£¨¼´½ÚµãÊı£©£¬´¢´æÃ¿¸öÃû³ÆºÍÊ±¿Ì
+			// è¡Œæ•°ï¼ˆå³èŠ‚ç‚¹æ•°ï¼‰ï¼Œå‚¨å­˜æ¯ä¸ªåç§°å’Œæ—¶åˆ»
 			int size = Data.size();
 			String[] name = new String[size];
 			int[] time = new int[size];
 			
-			// ÕâÁ©¶¼ÊÇÁÙÊ±±äÁ¿£¬Ç°ÕßÓÃÀ´²ğ·Ö£¬ºóÕßÊÇÁÙÊ±½Úµã
+			// è¿™ä¿©éƒ½æ˜¯ä¸´æ—¶å˜é‡ï¼Œå‰è€…ç”¨æ¥æ‹†åˆ†ï¼Œåè€…æ˜¯ä¸´æ—¶èŠ‚ç‚¹
 			String[] t = new String[2];
 			Node node = new Node();
 			
-			// ´¢´æÃû³ÆºÍÊ±¿Ì
+			// å‚¨å­˜åç§°å’Œæ—¶åˆ»
 			for (int j = 0; j < size; j++) {
 				
 				t = Data.get(j).split(" ");
@@ -118,12 +118,12 @@ public class Map {
 				
 			}
 			
-			// µÃµ½ÏàÁÚÕ¾µã£¬¼ÆËãÔËĞĞÊ±¼ä£¬¼´±ßµÄÈ¨ÖØ£¬ÒÔ¼°ÏßÂ·
+			// å¾—åˆ°ç›¸é‚»ç«™ç‚¹ï¼Œè®¡ç®—è¿è¡Œæ—¶é—´ï¼Œå³è¾¹çš„æƒé‡ï¼Œä»¥åŠçº¿è·¯
 			for (int j = 0; j < size; j++) {
 				
 				node = new Node(name[j]);
 				
-				// ÏàÁÚºÍÊ±¼ä
+				// ç›¸é‚»å’Œæ—¶é—´
 				if (j != 0) {
 					
 					node.Next.add(name[j - 1]);
@@ -138,7 +138,7 @@ public class Map {
 					
 				}
 				
-				// ÏßÂ·
+				// çº¿è·¯
 				if (i == 14 || i == 15) {
 					node.Line.add(i - 4);
 				}
@@ -146,7 +146,7 @@ public class Map {
 					node.Line.add(i);
 				}
 				
-				// Ìí¼ÓÕ¾µã
+				// æ·»åŠ ç«™ç‚¹
 				addNode(node);
 				
 			}
@@ -158,7 +158,7 @@ public class Map {
 		
 	}
 	
-	// ´òÓ¡½ÚµãÍ¼
+	// æ‰“å°èŠ‚ç‚¹å›¾
 	public void printNode () {
 		
 		for (int i = 0; i < M.size(); i++) {
@@ -183,7 +183,7 @@ public class Map {
 		
 	}
 	
-	// Ñ°ÕÒÁ½¸öÕ¾µãµÄ¹«¹²ÏßÂ·£¨ÈıºÅÏßºÍËÄºÅÏßÖØµşµÄÄÇ¶Î°´ÕÕËã·¨ÎªÈıºÅÏß£©
+	// å¯»æ‰¾ä¸¤ä¸ªç«™ç‚¹çš„å…¬å…±çº¿è·¯ï¼ˆä¸‰å·çº¿å’Œå››å·çº¿é‡å çš„é‚£æ®µæŒ‰ç…§ç®—æ³•ä¸ºä¸‰å·çº¿ï¼‰
 	public int getLine (String s1, String s2) {
 		
 		ArrayList<Integer> A1 = M.get(Name2ID.get(s1)).Line;
@@ -200,15 +200,15 @@ public class Map {
 		return 0;
 	}
 	
-	// ¹¹ÔìÂ·ÏßÍøÂçÍ¼
+	// æ„é€ è·¯çº¿ç½‘ç»œå›¾
 	public void constructRoadMap () {
 		
-		// Ë³ÊÖ¹¹½¨Name->IDµÄHashMap
+		// é¡ºæ‰‹æ„å»ºName->IDçš„HashMap
 		for (int i = 0; i < M.size(); i++) {
 			Name2ID.put(M.get(i).Name, M.get(i).ID);
 		}
 		
-		// Ë³ÊÖ¹¹½¨Name->LineµÄHashMap
+		// é¡ºæ‰‹æ„å»ºName->Lineçš„HashMap
 		for (int i = 0; i < M.size(); i++) {
 			Name2Line.put(M.get(i).Name, M.get(i).Line);
 		}
@@ -226,14 +226,14 @@ public class Map {
 			
 	}
 	
-	// ´òÓ¡ÄÇÁ½¸öHashMap
+	// æ‰“å°é‚£ä¸¤ä¸ªHashMap
 	public void printHashMap () {
 			
 		for (int i = 0; i < M.size(); i++) {
 				
 			String string = M.get(i).Name;
 			System.out.print(string + " ");
-			System.out.print(Name2ID.get(string) + "ºÅ ");
+			System.out.print(Name2ID.get(string) + "å· ");
 			System.out.print(Name2Line.get(string));
 			System.out.println();
 				
